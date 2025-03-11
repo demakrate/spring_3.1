@@ -68,7 +68,8 @@
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                     },
-                    body: `name=${encodeURIComponent(name)}&age=${encodeURIComponent(age)}&mail=${encodeURIComponent(mail)}`
+                    body: `name=${encodeURIComponent(name)}
+                        &age=${encodeURIComponent(age)}&mail=${encodeURIComponent(mail)}`
                 }).then(response => {
                     return response.text()
                 }).then(html => {
@@ -88,7 +89,8 @@
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                     },
-                    body: `name=${encodeURIComponent(name)}&age=${encodeURIComponent(age)}&mail=${encodeURIComponent(mail)}`
+                    body: `name=${encodeURIComponent(name)}
+                        &age=${encodeURIComponent(age)}&mail=${encodeURIComponent(mail)}`
                 }).then(response => {
                     return response.text()
                 }).then(html => {
@@ -114,7 +116,7 @@
 
 <div id="getForm" style="display: none">
     <form id="get">
-        <label for="getMail">ID:</label>
+        <label for="getMail">Mail:</label>
         <input type="text" id="getMail" name="mail" required>
         <button type="submit">Получить</button>
     </form>
@@ -134,7 +136,7 @@
 
 <div id="deleteForm" style="display: none">
     <form id="delete">
-        <label for="deleteMail">ID:</label>
+        <label for="deleteMail">Mail:</label>
         <input type="text" id="deleteMail" name="deleteMail" required>
         <button type="submit">Удалить</button>
     </form>
