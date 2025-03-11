@@ -32,7 +32,6 @@ public class HelloController {
     @GetMapping(value = "/getAllUsers")
     public String getAll(Model model) {
         if (!service.getAllUsers().equals(new ArrayList<User>())){
-            System.out.println(service.getAllUsers());
             model.addAttribute("users", service.getAllUsers());
             return ("allUsers");
         } else {
