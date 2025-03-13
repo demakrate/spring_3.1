@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -21,20 +22,31 @@ public class DaoHibernate implements dao {
 
     @Override
     public List<User> getAllUsers() {
-        TypedQuery<User> query = entityManagerFactory.createEntityManager().createQuery("from User", User.class);
-        return query.getResultList();
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        try {
+            TypedQuery<User> query = manager.createQuery("from User", User.class);
+            return query.getResultList();
+        } catch (PersistenceException e) {
+            System.out.println(e);
+            return (new ArrayList<>());
+        } finally {
+            manager.close();
+        }
+
     }
 
     @Override
     public User getUserByMail(String mail) {
-
+        EntityManager manager = entityManagerFactory.createEntityManager();
         try {
             String jpql = "SELECT user FROM User user WHERE user.mail = :value";
-            Query query = entityManagerFactory.createEntityManager().createQuery(jpql);
+            Query query = manager.createQuery(jpql);
             query.setParameter("value", mail);
             return ((User) query.getSingleResult());
         } catch (PersistenceException e) {
             return (null);
+        } finally {
+            manager.close();
         }
     }
 
@@ -50,6 +62,8 @@ public class DaoHibernate implements dao {
         } catch (PersistenceException e1) {
             transaction.rollback();
             return (false);
+        } finally {
+            manager.close();
         }
 
     }
@@ -68,6 +82,8 @@ public class DaoHibernate implements dao {
         } catch (PersistenceException e) {
             transaction.rollback();
             return (false);
+        } finally {
+            manager.close();
         }
 
     }
@@ -93,6 +109,8 @@ public class DaoHibernate implements dao {
                 transaction.rollback();
                 System.out.println(e1);
             }
+        } finally {
+            manager.close();
         }
     }
 }
