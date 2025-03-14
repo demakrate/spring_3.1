@@ -2,12 +2,11 @@ package db.Service;
 
 import db.Models.User;
 import db.dao.dao;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ServiceHibernate implements service {
+@org.springframework.stereotype.Service
+public class ServiceHibernate implements Service {
     private final dao methods;
 
     public ServiceHibernate(dao methods) {

@@ -4,7 +4,7 @@ import db.Models.User;
 
 import java.util.List;
 
-public interface service {
+public interface Service {
     public List<User> getAllUsers();
 
     public User getUserByMail(String mail);

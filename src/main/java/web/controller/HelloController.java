@@ -1,6 +1,7 @@
 package web.controller;
 
 import db.Config;
+import db.Service.Service;
 import db.Service.ServiceHibernate;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import java.util.List;
 public class HelloController {
     AnnotationConfigApplicationContext context =
             new AnnotationConfigApplicationContext(Config.class);
-    ServiceHibernate service = context.getBean(ServiceHibernate.class);
+    Service service = context.getBean(ServiceHibernate.class);
 
     @GetMapping(value = "/")
     public String printWelcome(ModelMap model) {
@@ -31,7 +32,7 @@ public class HelloController {
 
     @GetMapping(value = "/getAllUsers")
     public String getAll(Model model) {
-        if (!service.getAllUsers().equals(new ArrayList<User>())){
+        if (!service.getAllUsers().equals(new ArrayList<User>())) {
             model.addAttribute("users", service.getAllUsers());
             return ("allUsers");
         } else {
